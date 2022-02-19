@@ -77,16 +77,22 @@ do --Class helper functions
 	end;
 
 	function Class:IsColliding(Object1, Object2)
-		local Object1X = Object1.X;
-		local Object1Y = Object1.Y;
+		if Object1.X and Object1.Y and Object2.X and Object2.Y and ((Object1.Width and Object1.Height) or Object1.Radius) and ((Object2.Width and Object2.Height) or Object2.Radius) then
+			local Object1X = Object1.X;
+			local Object1Y = Object1.Y;
+			local Object1Height = Object1.Height or Object1.Radius;
+			local Object1Width = Object1.Width or Object1.Radius;
 
-		local Object2X = Object2.X;
-		local Object2Y = Object2.Y;
+			local Object2X = Object2.X;
+			local Object2Y = Object2.Y;
+			local Object2Height = Object2.Height or Object2.Radius;
+			local Object2Width = Object2.Width or Object2.Radius;
 
-		local CollidingX = (Object1X + Object1.Width) > Object2X and (Object1X) < (Object2X + Object2.Width);
-		local CollidingY = (Object1Y + Object1.Height) > Object2Y and (Object1Y) < (Object2Y + Object2.Height);
+			local CollidingX = (Object1X + Object1Width) > Object2X and (Object1X) < (Object2X + Object2Width);
+			local CollidingY = (Object1Y + Object1Height) > Object2Y and (Object1Y) < (Object2Y + Object2Height);
 
-		return (CollidingX and CollidingY), CollidingX, CollidingY;
+			return (CollidingX and CollidingY), CollidingX, CollidingY;
+		end;
 	end;
 	function Class:DoesObjectExist(Object)
 		return type(Object) == 'table' and rawget(Object, '__exists') == true;
