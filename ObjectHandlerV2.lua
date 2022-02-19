@@ -101,7 +101,7 @@ do --Class helper functions
 				Window.Width = Width;
 				Window.Height = Height;
 
-				local Middle = Window;
+				local Middle = Window.Middle;
 				Middle.X = Width / 2;
 				Middle.Y = Height / 2;
 			else
